@@ -35,6 +35,9 @@ if (!fs.existsSync(uploadsDir)) {
 
 const app = express();
 
+// Trust proxy for express-rate-limit behind Render's reverse proxy
+app.set('trust proxy', 1);
+
 connectDB();
 
 app.use(helmet({
