@@ -17,6 +17,7 @@ import sizeDistributionRoutes from './routes/sizeDistributions.js';
 import analyticsRoutes from './routes/analytics.js';
 import heroBannerRoutes from './routes/heroBanners.js';
 import settingsRoutes from './routes/settings.js';
+import seedRoutes from './routes/seed.js';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -75,6 +76,7 @@ app.use('/api/v1/size-distributions', sizeDistributionRoutes);
 app.use('/api/v1/hero-banners', heroBannerRoutes);
 app.use('/api/v1/analytics', analyticsRoutes);
 app.use('/api/v1/settings', settingsRoutes);
+app.use('/api/v1/seed', seedRoutes);
 
 app.get('/api/v1/health', (req, res) => {
   res.json({ status: 'ok', message: 'Denimisia API is running' });

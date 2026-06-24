@@ -1,8 +1,7 @@
-import mongoose from 'mongoose';
-import dotenv from 'dotenv';
-import Product from './models/Product.js';
+import express from 'express';
+import Product from '../models/Product.js';
 
-dotenv.config();
+const router = express.Router();
 
 const products = [
   {
@@ -18,10 +17,7 @@ const products = [
     rise: 'Mid Rise',
     closure: 'Button Fly',
     care: 'Machine Washable',
-    images: [
-      'https://images.unsplash.com/photo-1542272454315-4c01d7abdf4a?w=800',
-      'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=800'
-    ],
+    images: ['https://images.unsplash.com/photo-1542272454315-4c01d7abdf4a?w=800'],
     category: 'Jeans',
     stock: { '28': 50, '30': 100, '32': 120, '34': 80, '36': 40 },
     totalStock: 390,
@@ -32,8 +28,8 @@ const products = [
   {
     name: 'Relaxed Fit Cargo Pants',
     slug: 'relaxed-fit-cargo-pants',
-    description: 'Comfortable relaxed fit cargo pants with multiple pockets. Durable denim fabric perfect for work and play.',
-    shortDescription: 'Comfortable cargo pants with multiple pockets',
+    description: 'Comfortable relaxed fit cargo pants with multiple pockets.',
+    shortDescription: 'Comfortable cargo pants',
     basePrice: 920,
     sizes: ['28', '30', '32', '34', '36', '38'],
     color: 'Stone Wash',
@@ -42,9 +38,7 @@ const products = [
     rise: 'Mid Rise',
     closure: 'Zipper',
     care: 'Machine Washable',
-    images: [
-      'https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?w=800'
-    ],
+    images: ['https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?w=800'],
     category: 'Jeans',
     stock: { '28': 30, '30': 60, '32': 80, '34': 70, '36': 50, '38': 25 },
     totalStock: 315,
@@ -55,8 +49,8 @@ const products = [
   {
     name: 'Straight Leg Jeans',
     slug: 'straight-leg-jeans',
-    description: 'Classic straight leg jeans with a timeless look. High-quality denim with perfect distressing.',
-    shortDescription: 'Classic straight leg denim jeans',
+    description: 'Classic straight leg jeans with a timeless look.',
+    shortDescription: 'Classic straight leg denim',
     basePrice: 780,
     sizes: ['28', '30', '32', '34', '36'],
     color: 'Medium Wash',
@@ -65,9 +59,7 @@ const products = [
     rise: 'Mid Rise',
     closure: 'Button Fly',
     care: 'Machine Washable',
-    images: [
-      'https://images.unsplash.com/photo-1582552938357-32b906df40cb?w=800'
-    ],
+    images: ['https://images.unsplash.com/photo-1582552938357-32b906df40cb?w=800'],
     category: 'Jeans',
     stock: { '28': 45, '30': 90, '32': 110, '34': 75, '36': 35 },
     totalStock: 355,
@@ -78,8 +70,8 @@ const products = [
   {
     name: 'Skinny Fit High Rise',
     slug: 'skinny-fit-high-rise',
-    description: 'Modern skinny fit jeans with high rise waist. Stretch denim for ultimate comfort and style.',
-    shortDescription: 'Modern skinny fit with high rise waist',
+    description: 'Modern skinny fit jeans with high rise waist.',
+    shortDescription: 'Modern skinny fit',
     basePrice: 950,
     sizes: ['26', '28', '30', '32', '34'],
     color: 'Black',
@@ -88,9 +80,7 @@ const products = [
     rise: 'High Rise',
     closure: 'Zipper',
     care: 'Machine Washable',
-    images: [
-      'https://images.unsplash.com/photo-1565084888279-aca607ecce0c?w=800'
-    ],
+    images: ['https://images.unsplash.com/photo-1565084888279-aca607ecce0c?w=800'],
     category: 'Jeans',
     stock: { '26': 25, '28': 50, '30': 75, '32': 60, '34': 40 },
     totalStock: 250,
@@ -101,8 +91,8 @@ const products = [
   {
     name: 'Bootcut Jeans',
     slug: 'bootcut-jeans',
-    description: 'Classic bootcut jeans with slight flare at the leg opening. Perfect for boots and casual wear.',
-    shortDescription: 'Classic bootcut with subtle flare',
+    description: 'Classic bootcut jeans with slight flare.',
+    shortDescription: 'Classic bootcut style',
     basePrice: 820,
     sizes: ['28', '30', '32', '34', '36'],
     color: 'Light Wash',
@@ -111,9 +101,7 @@ const products = [
     rise: 'Mid Rise',
     closure: 'Button Fly',
     care: 'Machine Washable',
-    images: [
-      'https://images.unsplash.com/photo-1475178626620-a4d074967452?w=800'
-    ],
+    images: ['https://images.unsplash.com/photo-1475178626620-a4d074967452?w=800'],
     category: 'Jeans',
     stock: { '28': 35, '30': 70, '32': 90, '34': 65, '36': 30 },
     totalStock: 290,
@@ -124,8 +112,8 @@ const products = [
   {
     name: 'Jogger Denim Pants',
     slug: 'jogger-denim-pants',
-    description: 'Modern jogger style denim pants with elastic waistband and cuffs. Perfect blend of comfort and style.',
-    shortDescription: 'Modern jogger style with elastic cuffs',
+    description: 'Modern jogger style denim pants.',
+    shortDescription: 'Modern jogger style',
     basePrice: 880,
     sizes: ['28', '30', '32', '34', '36'],
     color: 'Blue Stone',
@@ -134,9 +122,7 @@ const products = [
     rise: 'Mid Rise',
     closure: 'Elastic',
     care: 'Machine Washable',
-    images: [
-      'https://images.unsplash.com/photo-1517438476312-10d76c06be2e?w=800'
-    ],
+    images: ['https://images.unsplash.com/photo-1517438476312-10d76c06be2e?w=800'],
     category: 'Jeans',
     stock: { '28': 40, '30': 80, '32': 100, '34': 70, '36': 45 },
     totalStock: 335,
@@ -146,24 +132,14 @@ const products = [
   }
 ];
 
-const seedDB = async () => {
+router.post('/products', async (req, res) => {
   try {
-    await mongoose.connect(process.env.MONGODB_URI);
-    console.log('MongoDB Connected');
-
-    // Clear existing products
     await Product.deleteMany({});
-    console.log('Existing products cleared');
-
-    // Insert new products
-    await Product.insertMany(products);
-    console.log('Products seeded successfully!');
-
-    process.exit(0);
+    const seeded = await Product.insertMany(products);
+    res.json({ success: true, count: seeded.length });
   } catch (error) {
-    console.error('Error seeding database:', error);
-    process.exit(1);
+    res.status(500).json({ success: false, error: error.message });
   }
-};
+});
 
-seedDB();
+export default router;
