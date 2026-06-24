@@ -33,7 +33,7 @@ const products = [
     basePrice: 920,
     sizes: ['28', '30', '32', '34', '36', '38'],
     color: 'Stone Wash',
-    fit: 'Relaxed',
+    fit: 'Cargo',
     material: '100% Cotton Denim',
     rise: 'Mid Rise',
     closure: 'Zipper',
