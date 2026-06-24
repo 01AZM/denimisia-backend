@@ -1,0 +1,27 @@
+services:
+  - type: web
+    name: denimisia-backend
+    env: node
+    region: oregon
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 5000
+      - key: MONGODB_URI
+        value: ${MONGODB_URI}
+      - key: JWT_SECRET
+        value: ${JWT_SECRET}
+      - key: JWT_EXPIRE
+        value: 30d
+      - key: FRONTEND_URL
+        value: ${FRONTEND_URL}
+      - key: CLOUDINARY_CLOUD_NAME
+        value: ${CLOUDINARY_CLOUD_NAME}
+      - key: CLOUDINARY_API_KEY
+        value: ${CLOUDINARY_API_KEY}
+      - key: CLOUDINARY_API_SECRET
+        value: ${CLOUDINARY_API_SECRET}
