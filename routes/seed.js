@@ -1,5 +1,7 @@
 import express from 'express';
 import Product from '../models/Product.js';
+import User from '../models/User.js';
+import bcrypt from 'bcryptjs';
 
 const router = express.Router();
 
@@ -137,6 +139,38 @@ router.post('/products', async (req, res) => {
     await Product.deleteMany({});
     const seeded = await Product.insertMany(products);
     res.json({ success: true, count: seeded.length });
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
+router.post('/admin', async (req, res) => {
+  try {
+    const { email, password, name } = req.body;
+
+    // Check if user exists
+    let user = await User.findOne({ email });
+
+    if (user) {
+      // Update existing user to admin
+      user.role = 'admin';
+      user.name = name || user.name;
+      await user.save();
+      res.json({ success: true, message: 'User updated to admin', email: user.email });
+    } else {
+      // Create new admin user
+      const salt = await bcrypt.genSalt(10);
+      const hashedPassword = await bcrypt.hash(password, salt);
+
+      user = await User.create({
+        name: name || 'Admin',
+        email,
+        password: hashedPassword,
+        role: 'admin'
+      });
+
+      res.json({ success: true, message: 'Admin created', email: user.email });
+    }
   } catch (error) {
     res.status(500).json({ success: false, error: error.message });
   }
